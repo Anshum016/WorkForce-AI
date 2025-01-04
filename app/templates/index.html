@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Make sure the stylesheet path is correct -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="script.js" defer></script> 
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Zen Dots', sans-serif; 
+    text-decoration: none;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures it stays behind other content */
+}
+.nav-link.active {
+    color: red;
+}
+
+
+body {
+    min-height: 100vh;
+    text-align: center;
+    background: #0C0C12;
+    color: whitesmoke;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 112.5%;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 1rem;
+}
+
+.header-content {
+    max-width: 1280px;
+    max-height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon {
+    width: 250px;
+    height: 200px; /* Ensure it fills the container */
+}
+
+.nav-link {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    transition: color 0.1s;
+}
+
+.nav-link:hover {
+    color: red;
+}
+
+.contact-button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+@media screen and (min-width: 845px) {
+    .contact-button {
+        display: block;
+    }
+}
+
+.contact-button:hover {
+    background-color: red;
+}
+
+.nav {
+    display: none;
+    gap: 2rem;
+}
+
+@media screen and (min-width: 845px) {
+    .nav {
+        display: flex;
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+    
+    .logo {
+        margin-right: 2rem;
+    }
+}
+
+.menu-button {
+    display: none;
+    border: none;
+    border-radius: 15px;
+    background-color: #E4E4E1;
+    background-image: radial-gradient(at top center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%),
+        linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(143, 152, 157, 0.60) 100%);
+    background-blend-mode: normal, multiply;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 845px) {
+    .menu-button {
+        display: block;
+    }
+}
+
+.menu-icon {
+    height: 150px;
+    width: 150px;
+}
+
+.main-section {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.6rem;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.content-left {
+    text-align: center;
+    animation: slideFromLeft 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.section-label {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.section-title {
+    color: whitesmoke;
+}
+
+.section-description {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.button-group {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.tour-button,
+.start-button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+.start-button:hover,
+.tour-button:hover {
+    background-color: red;
+}
+
+.content-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    border-radius: 0.625rem;
+    height: 57vh;
+}
+
+.section-image {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+    .main-section {
+        flex-direction: row;
+    }
+
+    .content-left {
+        max-width: 50%;
+        text-align: left;
+    }
+
+    .section-label,
+    .section-title,
+    .section-description {
+        padding-left: 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        justify-content: start;
+        padding-left: 0;
+    }
+}
+
+/* ================ The Timeline ================ */
+
+.timeline {
+    position: relative;
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 1em 0;
+    list-style-type: none;
+    overflow: hidden; /* Ensures the timeline contents stay within bounds */
+}
+
+.timeline:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    content: ' ';
+    display: block;
+    width: 6px;
+    height: 100%;
+    margin-left: -3px;
+    background: rgb(80, 80, 80);
+    background: linear-gradient(to bottom, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    z-index: 5;
+}
+
+.timeline li {
+    padding: 1em 0;
+    position: relative;
+    list-style-type: none;
+}
+
+.timeline li:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.direction-l {
+    position: relative;
+    width: 300px;
+    float: left;
+    text-align: right;
+    margin-bottom: 1em; /* Added some spacing for neatness */
+}
+
+.direction-r {
+    position: relative;
+    width: 300px;
+    float: right;
+    text-align: left;
+    margin-bottom: 1em; /* Added some spacing for neatness */
+}
+
+/* .flag-wrapper {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+} */
+
+.flag {
+    position: relative;
+    display: inline-block;
+    background: #333;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-weight: 600;
+    text-align: left;
+}
+
+.direction-l .flag {
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);
+} */
+
+/* .direction-r .flag {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+ 
+
+/* .direction-r .flag:before {
+    left: -9px;
+    border-top: 8px solid rgb(248, 248, 248);
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+} */
+.flag::before {
+    display: none;  /* This will remove the white box */
+}
+.time {
+    display: inline-block;
+    padding: 4px 6px;
+    background: #333;
+    color: whitesmoke;
+}
+
+.desc {
+    margin: 1em 0.75em 0 0;
+    font-size: 0.77777em;
+    font-style: italic;
+    line-height: 1.5em;
+    color: whitesmoke;
+}
+.direction-r .flag::before,
+.direction-l .flag::before {
+    display: none;
+}
+@media screen and (max-width: 660px) {
+    .timeline {
+        width: 90%;
+    }
+
+    .direction-l,
+    .direction-r {
+        width: 100%;
+        float: none;
+        text-align: center; /* Center-align text in both directions */
+        margin-bottom: 1em; /* Added spacing to avoid tight layout */
+    }
+
+    .timeline:before {
+        left: 0;
+        margin-left: 0;
+    }
+
+    .flag {
+        background: #333;
+        color: whitesmoke;
+        z-index: 15;
+    }
+
+    .desc {
+        position: relative;
+        margin: 1em 0 0 0;
+        padding: 1em;
+        background: #333;
+        color: whitesmoke;
+        -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
+        -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.20);
+        z-index: 15;
+    }
+}
+.slide-in-right {
+    animation: slideInRight 1s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  /* -----------------------------------------Footer CSS---------------------------- */
+  footer { 
+    background-color: #0C0C14; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.f-logo {
+    color: #FFFFFF;
+    font-family: 'Turret Road';
+    letter-spacing: 2px;
+    padding: 5px 10px;
+    font-size: 25px;
+}
+
+.up-section, .down-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 3% 0px;
+    margin: 5px;
+    width: 80%;
+    flex-wrap: wrap;
+}
+    .up-section { border-bottom: 1px solid #545562; }
+        .up-section ul, .down-section ul { font-family: 'Montserrat'; margin: 0; padding: 0 20px; }
+            .up-section ul li a, .down-section ul li a { font-size: 16px; color: #FFFFFF; transition: all ease .5s; }
+            .up-section ul li a:hover, .down-section ul li a:hover { color: #9A9FF6; }
+            .up-section ul li p, .down-section ul li p { font-size: 14px; color: #FFFFFF; line-height: 10px; transition: all ease .5s; }
+        .up-section h1, .down-section h1 { color: #9697A0; font-size: 20px; font-family: 'Montserrat'; }
+
+.social-icons { display: flex; }
+
+    .social-icons a { 
+        width: 35px;
+        height: 35px;
+        margin: 0 5px;
+        background-color: #424356;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, .1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease .5s;
+    }
+
+    .social-icons a:hover { background-color: #9A9FF6; }
+    .social-icons i { color: #FFFFFF; font-size: 14px; }
+        .social-icons a:hover i { color: #424356; }
+
+.search input {
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+.copyright { font-family: 'Montserrat'; font-size: 20px; color: #B3B3B3; }
+
+@media(max-width: 1024px) {
+    .search {
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center; 
+    }
+
+        .search h1 { margin: 20px; }
+}
+
+@media(max-width: 820px) {
+    body { background-color: #C03B3D; }
+    .up-section, .down-section { flex-direction: column; align-items: center; text-align: center; }
+        .up-section ul h1, .down-section ul h1 { font-size: 25px; }
+        .up-section ul li, .down-section ul li { text-align: center; margin: 10px; }
+}
+
+@media(max-width: 420px) {
+    .search { flex-direction: column; }
+    .copyright { font-size: 14px; }
+    .f-logo { font-size: 16px; }
+}
+
+/* Update the footer and all its child elements */
+footer, 
+footer .f-logo,
+footer ul,
+footer ul h1,
+footer ul li a,
+footer ul li p,
+footer .copyright,
+.up-section ul, 
+.down-section ul,
+.up-section ul li a, 
+.down-section ul li a,
+.up-section ul li p, 
+.down-section ul li p,
+.up-section h1, 
+.down-section h1 {
+    font-family: 'Zen Dots', sans-serif !important;
+}
+
+/* Remove or comment out these existing font-family declarations */
+.f-logo {
+    /* remove font-family: 'Turret Road'; */
+}
+
+.up-section ul, 
+.down-section ul {
+    /* remove font-family: 'Montserrat'; */
+}
+
+.up-section h1, 
+.down-section h1 {
+    /* remove font-family: 'Montserrat'; */
+}
+
+.copyright {
+    /* remove font-family: 'Montserrat'; */
+}
+
+/* Add these hover effects for footer links and text */
+footer .f-logo:hover,
+.up-section ul li a:hover, 
+.down-section ul li a:hover,
+.social-icons a:hover,
+.up-section ul li p:hover, 
+.down-section ul li p:hover {
+    color: #ff0000 !important; /* Change this to your desired hover color */
+    transition: color 0.3s ease; /* Smooth transition effect */
+}
+
+/* If you want to change the social icons hover color as well */
+.social-icons a:hover i {
+    color: #ff0000 !important; /* Change this to match your hover color */
+}
+
+.highlight {
+    color: #ff0000; /* Red color */
+    transition: color 0.3s ease; /* Optional: adds smooth color transition on hover */
+}
+
+/* Optional: Add hover effect */
+.highlight:hover {
+    color: #cc0000; /* Darker red on hover */
+}
+
+/* Mobile menu button styles */
+.menu-button {
+    display: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Hamburger lines */
+.menu-icon .line {
+    fill: #ff0847;
+    transition: all 0.3s ease;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(12, 12, 18, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.mobile-link {
+    display: block;
+    padding: 1rem 2rem;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.mobile-link:hover {
+    background-color: rgba(255, 8, 71, 0.1);
+    color: #ff0847;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 845px) {
+    .menu-button {
+        display: block;
+    }
+
+    .menu-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .contact-button {
+        display: none;
+    }
+
+    /* Remove red border */
+    body {
+        border: none;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Fix logo display */
+    .logo {
+        margin-left: 10px;
+    }
+
+    .logo-icon {
+        width: 150px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Adjust header content for mobile */
+    .header-content {
+        width: 100%;
+        padding: 0.5rem;
+        justify-content: space-between;
+    }
+
+    /* Adjust main content padding */
+    .content {
+        padding: 0 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Ensure content stays within viewport */
+    #main-content {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Adjust section layout */
+    .main-section {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .content-left {
+        width: 100%;
+        padding: 0;
+    }
+
+    .content-right {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .section-image {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+/* Additional fix for very small screens */
+@media screen and (max-width: 375px) {
+    .logo-icon {
+        width: 120px;
+    }
+
+    .content {
+        padding: 0 10px;
+    }
+}
+
+</style>
+<!-------------------------------------------------------This is end of css file -------------------------------------------------------------------------------------------------------------------------------------------------------->
+<body id = background>
+ <div id="Everything">
+
+    
+
+    <!-- Vanta Background Animation -->
+   
+
+
+    <div class="header">
+        <div class="header-content">
+            <a href="{{ url_for('index') }}" class="logo">
+                <img src="{{ url_for('static', filename='Images/WORKFORCE.AI.svg') }}" alt="Logo" class="logo-icon slide-in-right"/>
+            </a>
+
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('features') }}" class="nav-link">Features</a>
+                <a href="{{ url_for('pricing') }}" class="nav-link">Pricing</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                
+            </nav>
+
+            <a href="{{ url_for('contact') }}" class="contact-button">Contact us</a>
+
+            <button class="menu-button" id="menuButton">
+                <svg class="menu-icon" viewBox="0 0 100 100" width="30" height="30">
+                    <rect class="line line-1" width="80" height="8" x="10" y="25" rx="4"></rect>
+                    <rect class="line line-2" width="80" height="8" x="10" y="46" rx="4"></rect>
+                    <rect class="line line-3" width="80" height="8" x="10" y="67" rx="4"></rect>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="{{ url_for('index') }}" class="mobile-link">Home</a>
+        <a href="{{ url_for('features') }}" class="mobile-link">Features</a>
+        <a href="{{ url_for('pricing') }}" class="mobile-link">Pricing</a>
+        <a href="{{ url_for('about') }}" class="mobile-link">About</a>
+        <a href="{{ url_for('contact') }}" class="mobile-link">Contact us</a>
+    </div>
+
+    <div class="content">
+        <section class="main-section">
+            <div class="content-left">
+                <p class="section-label">4bytes_</p>
+                <h1 class="section-title">YOUR OWN WORKFORCE FOR YOUR REDUNDANT TASKS</h1>
+                <p class="section-description">
+                    WORK<span class="highlight">FORCE</span>.AI is a platform designed for small to large scale businesses that serves as a 24X7 employee ready to handle calls and tasks for your business. This will help in reducing time and resources used for redundant tasks that do not require human intervention, exponentially reducing unnecessary costs and workloads
+                </p>
+                <div class="button-group">
+                    <a href="{{ url_for('afterstart') }}" class="start-button">Start Now</a>
+                    <a href="#tour" class="tour-button">Take Tour</a>
+                </div>
+            </div>
+
+            <div class="content-right">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='Images/Radicallybetter2.svg') }}" alt="sectionimage" class="section-image slide-in-right"/>
+                </div>
+            </div>
+            
+        </section>
+        <div class="timeline" id="timeline-background">
+            <ul class="timeline">
+                <!-- Item 1 -->
+                <li>
+                    <div class="direction-r">
+                        <div class="flag-wrapper">
+                            <span class="flag">Never miss a call</span>
+                            
+                        </div>
+                        <div class="desc">My current employment. Way better than the position before!</div>
+                    </div>
+                </li>
+                
+                <!-- Item 2 -->
+                <li>
+                    <div class="direction-l">
+                        <div class="flag-wrapper">
+                            <span class="flag">Any domain</span>
+                            <!-- <span class="time-wrapper"><span class="time">2011 - 2013</span></span> -->
+                        </div>
+                        <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, totam.</div>
+                    </div>
+                </li>
+
+                <!-- Item 3 -->
+                <li>
+                    <div class="direction-r">
+                        <div class="flag-wrapper">
+                            <span class="flag">Eliminates human inte-rvention</span>
+                            <!-- <span class="time-wrapper"><span class="time">2008 - 2011</span></span> -->
+                        </div>
+                        <div class="desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, suscipit.</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        
+
+        <div class="capability_container">
+            <div class="capability-logo">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="up-section">
+            <a href="#" class="f-logo">4 Bytes</a>
+
+            <ul>
+                <h1>Company</h1>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('features') }}">Features</a></li>
+                <li><a href="{{ url_for('pricing') }}">Pricing</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+
+            <ul>
+                <h1>About</h1>
+                <li><a href="#">Company</a></li>
+                <li><a href="#">Location</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Our Services</a></li>
+            </ul>
+
+            <ul>
+                <h1>Contact us</h1>
+                <li><p>+1 123 456 7890</p></li>
+                <li><p>House #215, Street 5</p></li>
+                <li><p>Washignton, DC</p></li>
+            </ul>
+        </div>
+
+        
+
+        
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+    <script>
+        // Background animation
+        VANTA.NET({
+            el: "#Everything",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xff0847,
+            backgroundColor: 0x0C0C14,
+            maxDistance: 19.00,
+            spacing: 12.00
+        });
+
+        // Timeline animation
+        
+
+        // Check if tour button exists before adding event listener
+        const tourButton = document.querySelector(".tour-button");
+        if (tourButton) {
+            tourButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.getElementById("timeline-background").scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            });
+        }
+
+        // Get the current page URL
+        var currentPage = window.location.pathname.split("/").pop();
+
+        // Add the 'active' class to the corresponding link
+        var links = document.querySelectorAll('.nav-link');
+        links.forEach(function(link) {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+    </script>
+ </div>
+ <script>
+    
+    var lname = document.getElementById("l-name");
+        var lemail = document.getElementById("l-email");
+        var lsub = document.getElementById("l-sub");
+        var ltarea = document.getElementById("l-tarea")
+
+        var textname = document.getElementById("name");  // I Really don't why 'name' is not working
+        var email = document.getElementById("email");
+        var subject = document.getElementById("subject");
+        var message = document.getElementById("message");
+
+
+
+        function labelmove(inputname)
+        {
+            if(inputname == "name")
+            {
+                lname.style.transition = "all 0.2s";
+                lname.style.marginTop = "-15px";
+                lname.style.marginLeft = "10px";
+                lname.style.zIndex = "10";
+                lname.style.transform = "scale(0.9)";
+                lname.style.padding = "5px 15px 5px 15px";
+                lname.style.backgroundColor = "#000000";
+            }
+
+            if(inputname == "email")
+            {
+                lemail.style.transition = "all 0.2s";
+                lemail.style.marginTop = "-15px";
+                lemail.style.marginLeft = "10px";
+                lemail.style.zIndex = "10";
+                lemail.style.transform = "scale(0.9)";
+                lemail.style.padding = "5px 15px 5px 15px";
+                lemail.style.backgroundColor = "#000000";
+            }
+
+            if(inputname == "subject")
+            {
+                lsub.style.transition = "all 0.2s";
+                lsub.style.marginTop = "-15px";
+                lsub.style.marginLeft = "10px";
+                lsub.style.zIndex = "10";
+                lsub.style.transform = "scale(0.9)";
+                lsub.style.padding = "5px 15px 5px 15px";
+                lsub.style.backgroundColor = "#000000";
+            }
+
+            if(inputname == "message")
+            {
+                ltarea.style.transition = "all 0.2s";
+                ltarea.style.marginTop = "-15px";
+                ltarea.style.marginLeft = "10px";
+                ltarea.style.zIndex = "10";
+                ltarea.style.transform = "scale(0.9)";
+                ltarea.style.padding = "5px 15px 5px 15px";
+                ltarea.style.backgroundColor = "#000000";
+            }
+        }
+
+        window.onclick = function(event)
+        {
+            if (event.target != textname &&  textname.value.length == 0)
+            {
+                lname.style.transform = "scale(1)";
+                lname.style.transition = "all 0.2s";
+                lname.style.marginTop = "17px";
+                lname.style.marginLeft = "20px";
+                lname.style.zIndex = "0";
+                lname.style.padding = "0px";
+                lname.style.backgroundColor = "transparent";
+            }
+            if (event.target != email && email.value.length == 0)
+            {
+                lemail.style.transform = "scale(1)";
+                lemail.style.transition = "all 0.2s";
+                lemail.style.marginTop = "17px";
+                lemail.style.marginLeft = "20px";
+                lemail.style.zIndex = "0";
+                lemail.style.padding = "0px";
+                lemail.style.backgroundColor = "transparent";
+            }
+            if(event.target != subject && subject.value.length == 0)
+            {
+                lsub.style.transform = "scale(1)";
+                lsub.style.transition = "all 0.2s";
+                lsub.style.marginTop = "17px";
+                lsub.style.marginLeft = "20px";
+                lsub.style.zIndex = "0";
+                lsub.style.padding = "0px";
+                lsub.style.backgroundColor = "transparent";
+            }
+            if(event.target != message && message.value.length == 0)
+            {
+                ltarea.style.transform = "scale(1)";
+                ltarea.style.transition = "all 0.2s";
+                ltarea.style.marginTop = "17px";
+                ltarea.style.marginLeft = "20px";
+                ltarea.style.zIndex = "0";
+                ltarea.style.padding = "0px";
+                ltarea.style.backgroundColor = "transparent";
+            }
+        }
+
+
+ </script>
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
+
+        menuButton.addEventListener('click', function() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.add('active');
+                menuButton.classList.add('active');
+            } else {
+                mobileMenu.classList.remove('active');
+                menuButton.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                menuButton.classList.remove('active');
+                isMenuOpen = false;
+            }
+        });
+
+        // Close menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                menuButton.classList.remove('active');
+                isMenuOpen = false;
+            });
+        });
+    });
+</script>
+ 
+</body>
+</html>

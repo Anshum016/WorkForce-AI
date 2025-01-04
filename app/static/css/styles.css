@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Zen Dots', sans-serif; 
+    text-decoration: none;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures it stays behind other content */
+}
+
+body {
+    min-height: 100vh;
+    text-align: center;
+    background: #0C0C12;
+    color: whitesmoke;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 112.5%;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 1rem;
+}
+
+.header-content {
+    max-width: 1280px;
+    max-height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon {
+    width: 100%;
+    height: 100%; /* Ensure it fills the container */
+}
+
+.nav-link {
+    font-size: 1.5rem; /* Increased font size */
+    padding: 0.5rem 1rem; /* Added padding for spacing */
+    color: #ffffff;
+    transition: color 0.1s;
+}
+
+.nav-link:hover {
+    color: red;
+}
+
+.contact-button {
+    display: none;
+    font-size: 1.5rem; /* Increased font size */
+    padding: 0.5rem 1rem; /* Added padding for spacing */
+    background-color: #333; /* Optional: Add a background color */
+    color: #fff; /* Optional: Set the text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+@media screen and (min-width: 845px) {
+    .contact-button {
+        display: block;
+    }
+}
+
+.contact-button:hover {
+    background-color: red;
+}
+
+.nav {
+    display: none;
+}
+
+@media screen and (min-width: 845px) {
+    .nav {
+        display: flex;
+    }
+}
+
+.menu-button {
+    display: none;
+    border: none;
+    border-radius: 15px;
+    background-color: #E4E4E1;
+    background-image: radial-gradient(at top center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%),
+        linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(143, 152, 157, 0.60) 100%);
+    background-blend-mode: normal, multiply;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 845px) {
+    .menu-button {
+        display: block;
+    }
+}
+
+.menu-icon {
+    height: 3rem;
+    width: 3rem;
+}
+
+.main-section {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.6rem;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.content-left {
+    text-align: center;
+    animation: slideFromLeft 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.section-label {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.section-title {
+    color: whitesmoke;
+}
+
+.section-description {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.button-group {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.tour-button,
+.start-button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+.start-button:hover,
+.tour-button:hover {
+    background-color: red;
+}
+
+.content-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    border-radius: 0.625rem;
+    height: 57vh;
+}
+
+.section-image {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+    .main-section {
+        flex-direction: row;
+    }
+
+    .content-left {
+        max-width: 50%;
+        text-align: left;
+    }
+
+    .section-label,
+    .section-title,
+    .section-description {
+        padding-left: 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        justify-content: start;
+        padding-left: 0;
+    }
+}
+
+/* ================ The Timeline ================ */
+
+.timeline {
+    position: relative;
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 1em 0;
+    list-style-type: none;
+}
+
+.timeline:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    content: ' ';
+    display: block;
+    width: 6px;
+    height: 100%;
+    margin-left: -3px;
+    background: rgb(80, 80, 80);
+    background: -moz-linear-gradient(top, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(30, 87, 153, 1)), color-stop(100%, rgba(125, 185, 232, 1)));
+    background: -webkit-linear-gradient(top, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    background: -o-linear-gradient(top, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    background: -ms-linear-gradient(top, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    background: linear-gradient(to bottom, rgba(80, 80, 80, 0) 0%, rgb(80, 80, 80) 8%, rgb(80, 80, 80) 92%, rgba(80, 80, 80, 0) 100%);
+    z-index: 5;
+}
+
+.timeline li {
+    padding: 1em 0;
+    position: relative;
+}
+
+.timeline li:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.direction-l {
+    position: relative;
+    width: 300px;
+    float: left;
+    text-align: right;
+}
+
+.direction-r {
+    position: relative;
+    width: 300px;
+    float: right;
+}
+
+.flag-wrapper {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.flag {
+    position: relative;
+    display: inline;
+    background: #333;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-weight: 600;
+    text-align: left;
+}
+
+.direction-l .flag {
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.direction-r .flag {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.direction-l .flag:before,
+.direction-r .flag:before {
+    position: absolute;
+    top: 50%;
+    right: -9px;
+    content: ' ';
+    border: 8px solid transparent;
+    border-top: 8px solid rgb(248, 248, 248);
+}
+
+.direction-r .flag:before {
+    left: -9px;
+    border-top: 8px solid rgb(248, 248, 248);
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+}
+
+.time {
+    display: inline-block;
+    padding: 4px 6px;
+    background: #333;
+    color: whitesmoke;
+}
+
+.desc {
+    margin: 1em 0.75em 0 0;
+    font-size: 0.77777em;
+    font-style: italic;
+    line-height: 1.5em;
+    color: whitesmoke;
+}
+
+@media screen and (max-width: 660px) {
+    .timeline {
+        width: 90%;
+    }
+
+    .direction-l,
+    .direction-r {
+        width: 100%;
+        float: none;
+    }
+
+    .timeline:before {
+        left: 0;
+        margin-left: 0;
+    }
+
+    .flag {
+        background: #333;
+        color: whitesmoke;
+        z-index: 15;
+    }
+
+    .desc {
+        position: relative;
+        margin: 1em 0 0 0;
+        padding: 1em;
+        background: #333;
+        color: whitesmoke;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0,0.20);
+        -moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
+        box-shadow: 0 0 1px rgba(0,0,0,0.20);
+        z-index: 15;
+    }
+}

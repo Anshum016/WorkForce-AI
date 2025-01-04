@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Make sure the stylesheet path is correct -->
+    
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Zen Dots', sans-serif; 
+    text-decoration: none;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures it stays behind other content */
+}
+.nav-link.active {
+    color: red;
+}
+
+body {
+    min-height: 100vh;
+    text-align: center;
+    background: #0C0C12;
+    color: whitesmoke;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 112.5%;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 1rem;
+}
+
+.header-content {
+    max-width: 1280px;
+    max-height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.logo {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon {
+    width: 250px;
+    height: 200px; /* Ensure it fills the container */
+}
+
+
+.nav-link {
+    font-size: 1.5rem; /* Increased font size */
+    padding: 0.5rem 1rem; /* Added padding for spacing */
+    color: #ffffff;
+    transition: color 0.1s;
+}
+
+.nav-link:hover {
+    color: red;
+}
+
+.contact-button {
+    display: none;
+    font-size: 1.5rem; /* Increased font size */
+    padding: 0.5rem 1rem; /* Added padding for spacing */
+    background-color: #333; /* Optional: Add a background color */
+    color: #fff; /* Optional: Set the text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+@media screen and (min-width: 845px) {
+    .contact-button {
+        display: block;
+    }
+}
+
+.contact-button:hover {
+    background-color: red;
+}
+
+.nav {
+    display: none;
+}
+
+@media screen and (min-width: 845px) {
+    .nav {
+        display: flex;
+        gap: 2rem;
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+    
+    .logo {
+        margin-right: 2rem;
+    }
+}
+
+.menu-button {
+    display: none;
+    border: none;
+    border-radius: 15px;
+    background-color: #E4E4E1;
+    background-image: radial-gradient(at top center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.03) 100%),
+        linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, rgba(143, 152, 157, 0.60) 100%);
+    background-blend-mode: normal, multiply;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width: 845px) {
+    .menu-button {
+        display: block;
+    }
+}
+
+.menu-icon {
+    height: 3rem;
+    width: 3rem;
+}
+
+.main-section {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0.6rem;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.content-left {
+    text-align: center;
+    animation: slideFromLeft 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.section-label {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.section-title {
+    color: whitesmoke;
+}
+
+.section-description {
+    padding: 2rem;
+    color: whitesmoke;
+}
+
+.button-group {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.tour-button,
+.start-button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s;
+}
+
+.start-button:hover,
+.tour-button:hover {
+    background-color: red;
+}
+
+.content-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    border-radius: 0.625rem;
+    height: 57vh;
+}
+
+.section-image {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+    .main-section {
+        flex-direction: row;
+    }
+
+    .content-left {
+        max-width: 50%;
+        text-align: left;
+    }
+
+    .section-label,
+    .section-title,
+    .section-description {
+        padding-left: 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        justify-content: start;
+        padding-left: 0;
+    }
+}
+
+/* -------------------------------------This is the css for the cards------------------> */
+
+
+.card-container { /* New parent class for cards */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 50px;
+  gap: 50px;
+}
+
+.card-container .box {
+  position: relative;
+  height: 550px;
+  width: 300px; /* Slightly increased width */
+  background: #fff;
+  border-radius: 20px;
+  opacity: 0;
+}
+
+.card-container .box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: #f00;
+}
+
+.card-container .box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: #f00;
+  filter: blur(16px);
+}
+
+.card-container .box b {
+  padding: 20px; /* Adjusted padding */
+  position: absolute;
+  display: block;
+  inset: 4px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 2;
+}
+
+.card-container .box b p {
+  font-weight: 200;
+  color: #fff;
+  text-shadow: 0 0 15px #df0b0b;
+}
+
+.card-container .box:nth-child(1)::before,
+.card-container .box:nth-child(1)::after {
+  background: linear-gradient(45deg, #f73939, #222121);
+}
+
+.card-container .box:nth-child(2)::before,
+.card-container .box:nth-child(2)::after {
+  background: linear-gradient(45deg, #f73939, #222121);
+}
+
+.card-container .box:nth-child(3)::before,
+.card-container .box:nth-child(3)::after {
+  background: linear-gradient(45deg, #f73939, #222121);
+}
+
+/* Add animation to first card */
+.card-container .box:nth-child(1) {
+    animation: slideFromLeft 1s ease forwards;
+}
+
+/* Add animation to middle card */
+.card-container .box:nth-child(2) {
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Add animation to last card */
+.card-container .box:nth-child(3) {
+    animation: slideFromRight 1s ease forwards;
+}
+
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* -----------------------Slide from right animation----------------- */
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.feature-list li {
+    font-size: 0.8rem; /* Reduced font size */
+    margin: 8px 0; /* Reduced margin */
+    color: #fff;
+    padding: 5px 10px;
+    word-wrap: break-word; /* Ensures long text wraps */
+    line-height: 1.2; /* Reduced line height */
+}
+
+.feature-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.feature-list h1 {
+    text-align: center;
+    margin-bottom: 15px; /* Optional: adds some space below the price */
+}
+
+/* Add these styles for the payment button */
+.payment-btn {
+    display: block;
+    width: 80%;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.payment-btn:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
+/* Add the slide-in animation for the logo */
+.slide-in-right {
+    animation: slideInRight 1s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+</style>
+<!-------------------------------------------------------This is end of css file -------------------------------------------------------------------------------------------------------------------------------------------------------->
+<body id = background>
+ <div id="Everything">
+
+    
+
+    <!-- Vanta Background Animation -->
+   
+
+
+    <div class="header">
+        <div class="header-content">
+            <a href="{{ url_for('index') }}" class="logo">
+                <img src="{{ url_for('static', filename='Images/WORKFORCE.AI.svg') }}" alt="Logo" class="logo-icon slide-in-right"/>
+            </a>
+
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('features') }}" class="nav-link">Features</a>
+                <a href="{{ url_for('pricing') }}" class="nav-link">Pricing</a>
+                <a href="{{ url_for('about') }}" class="nav-link">About</a>
+            </nav>
+
+            <a href="{{ url_for('contact') }}" class="contact-button">Contact us</a>
+
+            <button class="menu-button">
+                <img src="{{ url_for('static', filename='Images/Hamburger.svg') }}" alt="menubutton" class="menu-icon">
+            </button>
+        </div>
+    </div>
+     
+    <div class="some">
+        <div>
+            <div class="card-container">
+                <div class="box">
+                    <b>
+                        <p>Basic Plan</p>
+                        <ul class="feature-list">
+                            <h1 style="text-align: center;">Rs500</h1>
+                            <li>✓ AI-Powered Resume Screening</li>
+                            <li>✓ Basic Job Posting</li>
+                            <li>✓ Up to 50 Applications/Month</li>
+                            <li>✓ Email Support</li>
+                            <li>✓ Basic Analytics</li>
+                            <li>✓ Single User Account</li>
+                            <button class="payment-btn">Get Started</button>
+                        </ul>
+                    </b>
+                </div>
+                
+                <div class="box">
+                    <b>
+                        <p>Intermediate Plan</p>
+                        <ul class="feature-list">
+                            <h1 style="text-align: center;">Rs1000</h1>
+                            <li>✓ Everything in Basic Plan</li>
+                            <li>✓ Advanced Job Posting</li>
+                            <li>✓ Up to 200 Applications/Month</li>
+                            <li>✓ Priority Email Support</li>
+                            <li>✓ Advanced Analytics</li>
+                            <li>✓ Multiple User Accounts</li>
+                            <button class="payment-btn">Get Started</button>
+                        </ul>
+                    </b>
+                </div>
+                
+                <div class="box">
+                    <b>
+                        <p>Advanced Plan</p>
+                        <ul class="feature-list">
+                            <h1 style="text-align: center;">Rs2000</h1>
+                            <li>✓ Everything in Intermediate Plan</li>
+                            <li>✓ Custom Job Posting Solutions</li>
+                            <li>✓ Unlimited Applications</li>
+                            <li>✓ 24/7 Priority Support</li>
+                            <li>✓ Custom Analytics Dashboard</li>
+                            <li>✓ Enterprise User Management</li>
+                            <button class="payment-btn">Get Started</button>
+                        </ul>
+                    </b>
+                </div>
+            </div>
+        </div>    
+    </div>
+    
+            
+        
+        
+
+        
+
+        <div class="capability_container">
+            <div class="capability-logo">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+    <script>
+        // Background animation
+        VANTA.NET({
+            el: "#Everything",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xff0847,
+            backgroundColor: 0x0C0C14,
+            maxDistance: 19.00,
+            spacing: 12.00
+        });
+
+        // Timeline animation
+        
+
+        document.querySelector(".tour-button").addEventListener("click", function (e) {
+    e.preventDefault(); // Prevent the default jump to the element
+    document.getElementById("timeline-background").scrollIntoView({
+      behavior: "smooth", // Smooth scrolling effect
+      block: "start",     // Scroll to the top of the element
+    });
+  });
+  // Get the current page URL
+var currentPage = window.location.pathname.split("/").pop();
+
+// Add the 'active' class to the corresponding link
+var links = document.querySelectorAll('.nav-link');
+links.forEach(function(link) {
+    if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+    }
+});
+
+    </script>
+ </div>
+</body>
+</html>

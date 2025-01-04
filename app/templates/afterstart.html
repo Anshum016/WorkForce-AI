@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After Start</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Zen Dots', sans-serif; 
+        text-decoration: none;
+    }
+
+    /* Background container styles */
+    #background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+    }
+
+    #vanta-background {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Main content wrapper */
+    #main-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        min-height: 100vh;
+        padding-top: 0;
+        box-sizing: border-box;
+    }
+
+    /* Navbar styles */
+    .header-content {
+        max-width: 1280px;
+        max-height: 50px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-icon {
+        width: 180px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    @media screen and (min-width: 845px) {
+        .nav {
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+        
+        .logo {
+            margin-right: 2rem;
+        }
+    }
+
+    .nav-link {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        color: #ffffff;
+        transition: color 0.1s;
+    }
+
+    .nav-link:hover {
+        color: red;
+    }
+
+    .nav-link.active {
+        color: red;
+    }
+
+    .contact-button {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.1s;
+    }
+
+    .contact-button:hover {
+        background-color: red;
+    }
+
+    /* Add the slide-in animation */
+    .slide-in-right {
+        animation: slideInRight 1s ease-out;
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        color: white;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem;
+        margin-top: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 600px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .card:first-child {
+        animation-delay: 0.2s;
+    }
+
+    .card:last-child {
+        animation-delay: 0.4s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 8, 71, 0.2);
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        color: #ff0847;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .card-description {
+        color: white;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .card-button {
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        padding: 0.8rem 1.5rem;
+        background: #ff0847;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+    }
+
+    .card-button:hover {
+        background: #cc0639;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Enhanced mobile responsiveness */
+    @media screen and (max-width: 768px) {
+        .cards-container {
+            padding: 1rem 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-button {
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            width: 80%;
+        }
+    }
+
+    /* Small mobile devices */
+    @media screen and (max-width: 375px) {
+        .cards-container {
+            padding: 0.5rem;
+        }
+
+        .card {
+            width: 98%;
+        }
+
+        .card-content {
+            padding: 0.8rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+        }
+
+        .card-description {
+            font-size: 0.85rem;
+        }
+
+        .card-button {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Adjust header for mobile */
+    @media screen and (max-width: 768px) {
+        .header-content {
+            padding: 0.3rem 0.5rem;
+        }
+
+        .logo-icon {
+            width: 150px;
+            height: 40px;
+        }
+    }
+
+    /* Update contact button styles */
+    .contact-button.desktop-only {
+        display: none;
+    }
+
+    @media screen and (min-width: 845px) {
+        .contact-button.desktop-only {
+            display: block;
+        }
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(12, 12, 18, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        z-index: 1000;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .mobile-link {
+        display: block;
+        padding: 1rem 2rem;
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .mobile-link:hover {
+        background-color: rgba(255, 8, 71, 0.1);
+        color: #ff0847;
+    }
+
+    .menu-button {
+        display: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    @media screen and (max-width: 845px) {
+        .menu-button {
+            display: block;
+        }
+    }
+
+    .menu-icon {
+        width: 30px;
+        height: 30px;
+    }
+</style>
+
+<body>
+    <!-- Background container -->
+    <div id="background-container">
+        <div id="vanta-background"></div>
+    </div>
+
+    <!-- Main content wrapper -->
+    <div id="main-content">
+        <!-- Navbar -->
+        <div class="header">
+            <div class="header-content">
+                <a href="{{ url_for('index') }}" class="logo">
+                    <img src="{{ url_for('static', filename='Images/WORKFORCE.AI.svg') }}" alt="Logo" class="logo-icon slide-in-right"/>
+                </a>
+
+                <nav class="nav">
+                    <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('features') }}" class="nav-link">Features</a>
+                    <a href="{{ url_for('pricing') }}" class="nav-link">Pricing</a>
+                    <a href="{{ url_for('about') }}" class="nav-link">About</a>
+                </nav>
+
+                <a href="{{ url_for('contact') }}" class="contact-button desktop-only">Contact us</a>
+
+                <button class="menu-button" id="menuButton">
+                    <img src="{{ url_for('static', filename='Images/Hamburger.svg') }}" alt="menubutton" class="menu-icon">
+                </button>
+            </div>
+
+            <!-- Add mobile menu -->
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="{{ url_for('index') }}" class="mobile-link">Home</a>
+                <a href="{{ url_for('features') }}" class="mobile-link">Features</a>
+                <a href="{{ url_for('pricing') }}" class="mobile-link">Pricing</a>
+                <a href="{{ url_for('about') }}" class="mobile-link">About</a>
+                <a href="{{ url_for('contact') }}" class="mobile-link">Contact us</a>
+            </div>
+        </div>
+
+        <!-- Add this inside #main-content, after the header -->
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Stock Analysis</h2>
+                    <p class="card-description">
+                        Get detailed analysis of any stock including fundamentals, technical indicators, and market sentiment.
+                    </p>
+                    <a href="{{ url_for('start') }}" class="card-button">Analyze Stocks</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Portfolio Management</h2>
+                    <p class="card-description">
+                        Track and manage your investment portfolio with advanced analytics and real-time updates.
+                    </p>
+                    <a href="#" class="card-button">Manage Portfolio</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your existing afterstart.html content goes here -->
+        
+    </div>
+
+    <!-- Vanta.js initialization -->
+    <script>
+        VANTA.NET({
+            el: "#vanta-background",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xff0847,
+            backgroundColor: 0x0C0C14,
+            maxDistance: 19.00,
+            spacing: 12.00
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            let isMenuOpen = false;
+
+            menuButton.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.add('active');
+                } else {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.remove('active');
+                    isMenuOpen = false;
+                }
+            });
+
+            // Close menu when clicking a link
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    isMenuOpen = false;
+                });
+            });
+
+            // Add active class to current page link
+            const currentPage = window.location.pathname.split("/").pop();
+            const links = document.querySelectorAll('.nav-link, .mobile-link');
+            links.forEach(function(link) {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
